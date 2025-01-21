@@ -1,4 +1,4 @@
-const Address = require("../../models/Address");
+import Address from "../../models/Address.js";
 
 const addAddress = async (req, res) => {
   try {
@@ -133,4 +133,4 @@ const deleteAddress = async (req, res) => {
   }
 };
 
-module.exports = { addAddress, editAddress, fetchAllAddress, deleteAddress };
+export { addAddress, editAddress, fetchAllAddress, deleteAddress };

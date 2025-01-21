@@ -1,7 +1,7 @@
-const paypal = require("../../helpers/paypal");
-const Order = require("../../models/Order");
-const Cart = require("../../models/Cart");
-const Product = require("../../models/Product");
+import {paypal} from "../../helpers/paypal.js";
+import {Order} from "../../models/Order.js";
+import {Cart} from "../../models/Cart.js";
+import {Product} from "../../models/Product.js";
 
 const createOrder = async (req, res) => {
   try {
@@ -26,8 +26,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: import.meta.env.VITE_API_PAYPAL_URL + "/shop/paypal-return",
+        cancel_url: import.meta.env.VITE_API_PAYPAL_URL + "/shop/paypal-cancel",
       },
       transactions: [
         {
@@ -199,7 +199,7 @@ const getOrderDetails = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   createOrder,
   capturePayment,
   getAllOrdersByUser,

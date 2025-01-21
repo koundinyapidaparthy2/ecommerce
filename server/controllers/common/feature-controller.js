@@ -1,4 +1,4 @@
-const Feature = require("../../models/Feature");
+import Feature from "../../models/Feature.js";
 
 const addFeatureImage = async (req, res) => {
   try {
@@ -42,4 +42,4 @@ const getFeatureImages = async (req, res) => {
   }
 };
 
-module.exports = { addFeatureImage, getFeatureImages };
+export { addFeatureImage, getFeatureImages };

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const AddressSchema = new mongoose.Schema(
   {
@@ -11,5 +11,5 @@ const AddressSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-module.exports = mongoose.model("Address", AddressSchema);
+const Address = mongoose.model("Address", AddressSchema);
+export default Address

@@ -1,5 +1,5 @@
-const cloudinary = require("cloudinary").v2;
-const multer = require("multer");
+import {v2 as cloudinary} from "cloudinary";
+import multer from "multer";
 
 
 cloudinary.config({ 
@@ -20,4 +20,4 @@ async function imageUploadUtil(file) {
 
 const upload = multer({ storage });
 
-module.exports = { upload, imageUploadUtil };
+export { upload, imageUploadUtil };

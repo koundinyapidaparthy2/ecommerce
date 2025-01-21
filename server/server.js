@@ -1,36 +1,40 @@
-require("dotenv").config()
-const express = require("express");
-const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const authRouter = require("./routes/auth/auth-routes");
-const adminProductsRouter = require("./routes/admin/products-routes");
-const adminOrderRouter = require("./routes/admin/order-routes");
+import dotenv from "dotenv"
+import express from "express"
+import mongoose from "mongoose"
+import cookieParser from "cookie-parser"
+import cors from "cors"
+import authRouter from "./routes/auth/auth-routes.js"
+import adminProductsRouter  from  "./routes/admin/products-routes.js"
+import adminOrderRouter  from  "./routes/admin/order-routes.js"
 
-const shopProductsRouter = require("./routes/shop/products-routes");
-const shopCartRouter = require("./routes/shop/cart-routes");
-const shopAddressRouter = require("./routes/shop/address-routes");
-const shopOrderRouter = require("./routes/shop/order-routes");
-const shopSearchRouter = require("./routes/shop/search-routes");
-const shopReviewRouter = require("./routes/shop/review-routes");
+import shopProductsRouter  from  "./routes/shop/products-routes.js"
+import shopCartRouter  from  "./routes/shop/cart-routes.js"
+import shopAddressRouter  from  "./routes/shop/address-routes.js"
+import shopOrderRouter  from  "./routes/shop/order-routes.js"
+import shopSearchRouter  from  "./routes/shop/search-routes.js"
+import shopReviewRouter  from  "./routes/shop/review-routes.js"
 
-const commonFeatureRouter = require("./routes/common/feature-routes");
+import commonFeatureRouter  from  "./routes/common/feature-routes.js"
 
 //create a database connection -> u can also
 //create a separate file for this and then import/use that file here
 
+dotenv.config()
 mongoose
   .connect(process.env.MONGO_URL || "mongodb://localhost:27017/ecommerce")
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 8000;
 app.use(
   cors({
-    origin: "*",
-    methods: "*",
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      callback(null, origin);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Define allowed methods explicitly
     allowedHeaders: [
       "Content-Type",
       "Authorization",
@@ -38,7 +42,7 @@ app.use(
       "Expires",
       "Pragma",
     ],
-    credentials: true,
+    credentials: true, // Support cookies or authentication headers
   })
 );
 
